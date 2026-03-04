@@ -16,10 +16,10 @@ export default function CartPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-50 to-coral-50 p-6 font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 p-6 font-sans">
       <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6">
         {/* Page title */}
-        <h1 className="text-2xl font-bold text-teal-800 mb-4">Your Cart</h1>
+        <h1 className="text-2xl font-bold text-[#0B3D91] mb-4">Your Cart</h1>
 
         {/* Show message if cart is empty */}
         {cartItems.length === 0 && <p>Your cart is empty.</p>}
@@ -37,7 +37,7 @@ export default function CartPage() {
             <div className="flex items-center gap-2">
               {/* Decrease quantity */}
               <button
-                className="px-2 py-1 bg-gray-200 rounded"
+                className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 transition"
                 onClick={() =>
                   updateQuantity(item.id, (item.quantity || 1) - 1)
                 }
@@ -50,7 +50,7 @@ export default function CartPage() {
 
               {/* Increase quantity */}
               <button
-                className="px-2 py-1 bg-gray-200 rounded"
+                className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 transition"
                 onClick={() =>
                   updateQuantity(item.id, (item.quantity || 1) + 1)
                 }
@@ -60,7 +60,7 @@ export default function CartPage() {
 
               {/* Remove item from cart */}
               <button
-                className="ml-4 px-2 py-1 bg-red-500 text-white rounded"
+                className="ml-4 px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
                 onClick={() => removeFromCart(item.id)}
               >
                 Remove
@@ -81,7 +81,7 @@ export default function CartPage() {
             {/* Checkout button */}
             <Link
               href="/checkout/success"
-              className="mt-4 block text-center bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition"
+              className="mt-4 block text-center bg-[#0B3D91] text-white py-2 rounded-lg hover:bg-[#062A61] transition"
             >
               Checkout
             </Link>

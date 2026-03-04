@@ -1,4 +1,4 @@
-"use client";
+"use client"; // Runs on the client (browser)
 
 import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
@@ -6,6 +6,7 @@ import { fetchProducts } from "@/services/api";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 
+// Define product structure
 interface Product {
   id: string;
   title: string;
@@ -18,14 +19,19 @@ interface Product {
 }
 
 export default function Home() {
+  // State for all products
   const [products, setProducts] = useState<Product[]>([]);
+  // State for search input
   const [search, setSearch] = useState("");
+  // Loading and error states
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  // Cart hover dropdown visibility
   const [hoverCart, setHoverCart] = useState(false);
 
   const { addToCart, cartItems } = useCart();
 
+  // Fetch products on component mount
   useEffect(() => {
     async function loadProducts() {
       try {
@@ -40,36 +46,42 @@ export default function Home() {
     loadProducts();
   }, []);
 
+  // Filter products based on search input
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(search.toLowerCase())
   );
 
+  // Calculate cart totals
   const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
   const totalCost = cartItems.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
   );
 
+  // Show loading or error messages
   if (loading) return <p className="p-6 text-center">Loading products…</p>;
   if (error) return <p className="p-6 text-center text-red-600">{error}</p>;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-50 to-coral-50 font-sans">
-      
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 font-sans">
+
       {/* HEADER */}
       <header className="sticky top-0 z-50 bg-white shadow-md">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <h1 className="text-3xl font-bold text-teal-800">Online Shop</h1>
+          
+          {/* Site title */}
+          <h1 className="text-3xl font-bold text-[#0B3D91]">Online Shop</h1>
 
+          {/* Navigation & Cart */}
           <nav className="flex items-center gap-6 relative">
-            <Link href="/" className="font-medium text-teal-700 hover:text-teal-900">Home</Link>
-            <Link href="/contact" className="font-medium text-teal-700 hover:text-teal-900">Contact</Link>
+            <Link href="/" className="font-medium text-[#0B3D91] hover:text-[#062A61]">Home</Link>
+            <Link href="/contact" className="font-medium text-[#0B3D91] hover:text-[#062A61]">Contact</Link>
 
-            {/* Cart hover */}
+            {/* Cart dropdown */}
             <div
               onMouseEnter={() => setHoverCart(true)}
               onMouseLeave={() => setHoverCart(false)}
-              className="relative cursor-pointer font-medium text-teal-700 hover:text-teal-900"
+              className="relative cursor-pointer font-medium text-[#0B3D91] hover:text-[#062A61]"
             >
               Cart ({totalQuantity})
 
@@ -90,7 +102,7 @@ export default function Home() {
                       </div>
                       <Link
                         href="/cart"
-                        className="block mt-2 text-center bg-teal-600 text-white py-1 rounded hover:bg-teal-700"
+                        className="block mt-2 text-center bg-[#0B3D91] text-white py-1 rounded hover:bg-[#062A61]"
                       >
                         View Cart
                       </Link>
@@ -101,10 +113,11 @@ export default function Home() {
             </div>
           </nav>
 
+          {/* Search input */}
           <input
             type="text"
             placeholder="Search products…"
-            className="px-3 py-2 border rounded-md w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-teal-400"
+            className="px-3 py-2 border rounded-md w-full md:w-64 focus:outline-none focus:ring-2 focus:ring-[#0B3D91]"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -123,6 +136,7 @@ export default function Home() {
               key={product.id}
               className="bg-white rounded-2xl shadow-lg p-4 flex flex-col hover:scale-[1.02] transition"
             >
+              {/* Clicking the product image/title navigates to product page */}
               <Link href={`/items/${product.id}`} className="flex flex-col flex-1">
                 <div className="h-48 bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
                   <img
@@ -132,13 +146,13 @@ export default function Home() {
                   />
                 </div>
 
-                <h3 className="text-lg font-semibold text-teal-900 mb-1">{product.title}</h3>
+                <h3 className="text-lg font-semibold text-[#0B3D91] mb-1">{product.title}</h3>
 
                 <p className="text-gray-700 mb-2">
                   {product.discountedPrice !== undefined ? (
                     <>
                       <span className="line-through text-gray-400 mr-2">${product.price}</span>
-                      <span className="text-coral-500 font-semibold">${product.discountedPrice}</span>
+                      <span className="text-[#0B3D91] font-semibold">${product.discountedPrice}</span>
                     </>
                   ) : (
                     <span className="font-semibold">${product.price}</span>
@@ -148,13 +162,14 @@ export default function Home() {
                 <p className="text-sm text-gray-500 mb-4">Rating: {product.rating}</p>
               </Link>
 
+              {/* Add to cart button */}
               <button
                 onClick={(e) => {
-                  e.preventDefault(); // prevents navigating to product page
+                  e.preventDefault(); // prevent navigation when clicking
                   addToCart(product);
                   toast.success(`${product.title} added to cart!`);
                 }}
-                className="mt-auto px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition"
+                className="mt-auto px-4 py-2 bg-[#0B3D91] text-white rounded-lg hover:bg-[#062A61] transition"
               >
                 Add to Cart
               </button>

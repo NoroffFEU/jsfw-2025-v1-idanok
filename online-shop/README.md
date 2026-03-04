@@ -25,10 +25,8 @@ Data is fetched from the Noroff API:
 
 ## Installation
 1. Clone the repo:
-```bash
 git clone https://github.com/NoroffFEU/jsfw-2025-v1-idanok.git
 2. Go into project folder
-```bash
 cd online-shop
 3. Install dependencies:
 npm install

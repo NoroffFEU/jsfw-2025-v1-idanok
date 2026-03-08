@@ -1,7 +1,6 @@
-// online-shop/postcss.config.js
+// postcss.config.js eller postcss.config.mjs
 module.exports = {
     plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },o
-  };
+      '@tailwindcss/postcss': {}, // erstatter tailwindcss-pluginet
+    },
+  }

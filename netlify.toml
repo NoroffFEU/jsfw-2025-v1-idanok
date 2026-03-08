@@ -1,7 +1,11 @@
 [build]
   base = "online-shop"
   command = "npm run build"
-  publish = ".next"
+  publish = ".netlify/output" # NOT .next
+  functions = "netlify/functions"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 [build.environment]
   NODE_VERSION = "20"

@@ -1,11 +1,11 @@
 [build]
-  base = "online-shop"
-  command = "npm run build"
-  publish = ".netlify/output" # NOT .next
-  functions = "netlify/functions"
+  base = "online-shop"             # your Next.js folder
+  command = "npm run build"        # build command
+  publish = ".netlify/output"      # must be exactly this for the plugin
+  functions = "netlify/functions"  # serverless functions
 
 [[plugins]]
-  package = "@netlify/plugin-nextjs"
+  package = "@netlify/plugin-nextjs"  # Netlify Next.js plugin
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "20"               # Node 20 recommended for Next 14+

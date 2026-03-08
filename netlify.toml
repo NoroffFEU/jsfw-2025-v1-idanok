@@ -1,10 +1,7 @@
 [build]
-  base = "online-shop"          # folder containing package.json
-  command = "npm run build"     # Next.js build command
-  publish = "online-shop/.next" # Next.js output folder
+  base = "online-shop"
+  command = "npm run build"
+  publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "20"           # recommended for Next.js 14+
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+  NODE_VERSION = "20"

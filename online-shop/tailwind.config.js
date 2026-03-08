@@ -1,6 +1,10 @@
-[build]
-  base = "online-shop"      
-  command = "npm run build"     
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+    content: [
+      "./app/**/*.{js,ts,jsx,tsx}",
+      "./components/**/*.{js,ts,jsx,tsx}",
+      "./styles/**/*.{css}"
+    ],
+    theme: { extend: {} },
+    plugins: [],
+  };
